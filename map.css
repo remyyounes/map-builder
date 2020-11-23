@@ -1,0 +1,53 @@
+.map {
+    height: 500px;
+    width: 800px;   
+    display: inline-block;
+}
+
+.container  {
+    width: 100%
+}
+
+h3 { 
+   margin-top: 0; 
+}
+
+.info p {
+    margin: 5px;
+}
+
+.gm-style {
+    font-family: "Fira Sans";
+}
+
+.gm-style strong{ 
+    font-weight: 500;
+}
+
+.gm-style .company_logo { 
+    max-width: 100%;
+    max-height: 100px;
+}
+
+.cluster {
+    line-height: 41px;
+}
+
+.more h4 {
+    margin-bottom: 0;
+}
+.more .arrow {
+    width: 20px;
+    height: 20px;
+}
+.more.show .arrow {
+    transform: rotate(180deg);
+}
+
+.more .content {
+    display: none;
+}
+
+.more.show .content {
+    display: block;
+}
