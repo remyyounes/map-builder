@@ -8,6 +8,12 @@ const SHEETS_InnovMedica = '1P8kcOooZsA0UxK-bOYEfFmP4bonqW4h-9iiccfexnwk';
 const SHEETS_BigDatia = '1Hb-pqcET0WStHFFT4Zp3bF6PRCihrK0vwnvXSl93qOE';
 const SHEETS_Additivalley = '1puX66N8WHFDynESqZg24fueA68eG0MzX_8EZM52-hCw';
 
+const SHEETS = {
+  'innovmedica': SHEETS_InnovMedica,
+  'bigdatia': SHEETS_BigDatia,
+  'additivalley': SHEETS_Additivalley
+}
+
 
 const GOOGLE_API_KEY = 'AIzaSyDxtxnVPmLTpY_TcxUVyfzso9vuNU29z0A';
 const MAP_TYPE = 'roadmap';
@@ -30,9 +36,17 @@ const COLUMNS = {
 }
 
 function initialiseMap() {
-  createMap(SHEETS_InnovMedica);
-  createMap(SHEETS_BigDatia);
-  createMap(SHEETS_Additivalley);
+
+  const queryString = window.location.search;
+  const searchParams = new URLSearchParams(queryString);
+
+  if (searchParams.has("map")) {
+    const sheetName = searchParams.get("map");
+    const sheet = SHEETS[sheetName]
+    sheet && createMap(sheet)
+  }
+
+
 }
 
 function createMap(googleSheetId) {
@@ -159,8 +173,8 @@ function getInfo(location) {
     '</center>' +
     '<div class="info">' +
     renderRow('Sitio Web', url) +
-    // renderRow('Apellido', location.name) +
-    // renderRow('Mail', location.email) +
+    renderRow('Apellido', location.name) +
+    renderRow('Mail', location.email) +
     renderRow('Direccion', location.address) +
     renderRow('Territorio', location.territory) +
     '</div>' +
