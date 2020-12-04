@@ -8,6 +8,14 @@
     width: 100%
 }
 
+.logo {
+    max-width: 100px;
+    max-height: 100px;
+    bottom: 5px;
+    left: 5px;
+    position: absolute;
+}
+
 h3 { 
    margin-top: 0; 
 }

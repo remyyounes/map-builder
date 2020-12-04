@@ -20,6 +20,7 @@ const MAP_TYPE = 'roadmap';
 const MARKER_CLUSTER_IMG_URL = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m";
 const MARKER_IMG_URL = "https://chart.apis.google.com/chart?cht=mm&chs=24x32&chco=FFFFFF,333333,000000&ext=.png";
 
+
 // SPREADSHEET COLUMN KEY
 const COLUMNS = {
   company: 0,
@@ -43,13 +44,13 @@ function initialiseMap() {
   if (searchParams.has("map")) {
     const sheetName = searchParams.get("map");
     const sheet = SHEETS[sheetName]
-    sheet && createMap(sheet)
+    sheet && createMap(sheet, sheetName)
   }
 
 
 }
 
-function createMap(googleSheetId) {
+function createMap(googleSheetId, sheetName) {
 
   const bounds = new google.maps.LatLngBounds();
   
@@ -77,9 +78,19 @@ function createMap(googleSheetId) {
 
   const container = document.getElementById('container');
   const mapContainer = document.createElement('div');
+  
   mapContainer.className = "map";
   container.appendChild(mapContainer);
   map = new google.maps.Map(mapContainer, mapOptions);
+
+  // ====
+  // logo
+  // ====
+  const mapLogo = document.createElement('img');
+  mapLogo.setAttribute('src', `./public/${sheetName}.png`)
+  mapLogo.className = "logo";
+  mapContainer.appendChild(mapLogo);
+
 
   // map.mapTypes.set("styled_map", styledMapType);
   // map.setMapTypeId("styled_map");
