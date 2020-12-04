@@ -44,13 +44,15 @@ function initialiseMap() {
   if (searchParams.has("map")) {
     const sheetName = searchParams.get("map");
     const sheet = SHEETS[sheetName]
-    sheet && createMap(sheet, sheetName)
+    const showLogo = searchParams.get("logo") !== '0'
+
+    sheet && createMap(sheet, sheetName, showLogo)
   }
 
 
 }
 
-function createMap(googleSheetId, sheetName) {
+function createMap(googleSheetId, sheetName, showLogo) {
 
   const bounds = new google.maps.LatLngBounds();
   
@@ -86,10 +88,12 @@ function createMap(googleSheetId, sheetName) {
   // ====
   // logo
   // ====
-  const mapLogo = document.createElement('img');
-  mapLogo.setAttribute('src', `./public/${sheetName}.png`)
-  mapLogo.className = "logo";
-  mapContainer.appendChild(mapLogo);
+  if (showLogo) {
+    const mapLogo = document.createElement('img');
+    mapLogo.setAttribute('src', `./public/${sheetName}.png`)
+    mapLogo.className = "logo";
+    mapContainer.appendChild(mapLogo);
+  }
 
 
   // map.mapTypes.set("styled_map", styledMapType);
